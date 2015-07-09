@@ -1,4 +1,6 @@
-
+<!--This gets the Array of Question objects, @questions from our controller -->
+<!--This then loops through the Objects to show the first question to our user
+and hides the rest for us using "show/hide" classes in CSS. -->
 <% @questions.each_with_index do |question, x| %>
   <% if x == 0 %>
   <%  @class = "show" %>
@@ -19,7 +21,7 @@
     <div class="answer"><%= question.get_answer_index %></div>
   </div>
 <% end %>
-
+<!--These are the buttons and input fields to get the user's answers, and run our quiz code -->
 <input type="text" id="answer"></input>
 <button id="submitter" type="button">That's my guess!</button>
 </div>

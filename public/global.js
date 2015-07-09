@@ -1,8 +1,3 @@
-/// Plan to do 
-// 1. Set global variable of question we are on
-// 2. Set global variable of array of all questions
-// 3. Use the global variable to find the answer class div of the current question
-// 4. Use that to check if their answer is right
 var current_question = 1;
 var number_of_questions = 4;
 var score = 0;
@@ -13,11 +8,11 @@ var score = 0;
 function given_answer(){
   return document.getElementById("answer").value
 };
-
+// Gets the current question Element from our Document
 function get_current_question() {
   return document.getElementById("question" + current_question);
 }
-
+// Gets the answer from the current_question's answer div.
 function get_answer() {
   var question = get_current_question();
   var array = question.children;
@@ -38,7 +33,11 @@ function find_element_from_array(array, class_name_to_find) {
     }
   }
 }
-
+// Checks to see if the answer given by the user is the correct answer
+// 
+// Accepts 1 argument, a String of the answer_text
+// 
+// Returns Boolean
 function is_correct_answer(answer_text) {
   if (answer_text === get_answer()){
     return true;
@@ -78,13 +77,16 @@ function finalScore() {
   return ((score/number_of_questions) * 100);
 }
 
-//
+// Clears the answer and question_result fields in our HTML
 function clearAnswer(){
   document.getElementById("answer").value = "";
   document.getElementById("question_result").innerText = "";
 }
 
-//
+// This method sets the new question onto the screen for our user, or displays their final score.
+// This also sets the score to increment if they have chosen the correct answer.
+// 
+// Returns nothing.
 function nextQuestion(){
   if (is_correct_answer(given_answer())) {
     score++;

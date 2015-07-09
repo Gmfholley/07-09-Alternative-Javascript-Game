@@ -1,8 +1,3 @@
-/// Plan to do 
-// 1. Set global variable of question we are on
-// 2. Set global variable of array of all questions
-// 3. Use the global variable to find the answer class div of the current question
-// 4. Use that to check if their answer is right
 var current_question = 1;
 var number_of_questions = 4;
 var score = 0;

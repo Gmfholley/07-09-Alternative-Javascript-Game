@@ -101,11 +101,11 @@ function process_answer_submission(){
 function displayQuestion() {
   var questionHTML = document.getElementById("question");
 
-  questionHTML.innerText = questions[questionIndex].question;
+  questionHTML.innerHTML = questions[questionIndex].question;
   
   var possibleAnswersHTML = document.getElementById("choices");
   
-  possibleAnswersHTML.innerText = getAllChoicesAsString(questions[questionIndex]);  
+  possibleAnswersHTML.innerHTML = getAllChoicesAsString(questions[questionIndex]);  
   
 };
 

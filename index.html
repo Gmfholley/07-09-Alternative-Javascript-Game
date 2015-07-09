@@ -3,6 +3,7 @@
   <head>
     <title>JavaScript DOM</title>
     <script type="text/javascript" src="global.js"></script>
+    <link href="global.css" rel="stylesheet">
   </head>
   <body>
     <div id="quiz">
@@ -14,6 +15,41 @@
     <div id="question_result"></div>
     <button id="next" onclick="nextQuestion()" type="button">Next question</button>
     <div id="total_result"></div>
+    
+    <div id="new-quiz">
+      
+      
+      <div id="question1" class="questions show">
+        <div class="display-question">
+          <p>A magical jar of jelly beans doubles the number of jelly beans every minute.  The jar is full at noon.  When is it half full?</p>
+        </div>
+        <div class="choices-new">  
+          <ol>
+            <li>11:59</li>
+            <li>11:30</li>
+            <li>It is impossible to answer this question.</li>
+            <li>12:01</li>
+          </ol>
+        </div>
+        <div class="answer">1</div>
+      </div>
+      
+<!--more questions here -->
+      <input type="text" id="answer-new"></input>
+      <button id="submitter-new" onclick="process_answer_submission()" type="button">That's my guess!</button>
+      </div>
+      <div id="question_result-new"></div>
+      <button id="next-new" onclick="nextQuestion()" type="button">Next question</button>
+      <div id="total_result-new"></div>
+      
+    </div>
+    
+    
+  
+    
+    
+    
+    
     
   </body>
 </html>

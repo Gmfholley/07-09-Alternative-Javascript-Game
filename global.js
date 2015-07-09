@@ -44,7 +44,30 @@ function given_answer(){
   return document.getElementById("answer").value
 };
 
-// TODO check for valid answer
+// gets the answer in the 'answer' ID html element
+//
+// returns a String of what the input field contains
+function given_answer_new(){
+  return document.getElementById("answer-new").value
+};
+
+
+
+
+
+
+/// Plan to do 
+// 1. Set global variable of question we are on
+// 2. Set global variable of array of all questions
+// 3. Use the global variable to find the answer class div of the current question
+// 4. Use that to check fi their answer is right
+
+
+
+
+
+
+
 // takes the answer_text as a string and returns its Index in the array
 //
 // answer_text - String that can be parsed into an Integer
@@ -71,6 +94,11 @@ function is_correct_answer(answer_text){
     return false;
   };    
 };
+
+function is_correct_answer_new(answer_text){
+  
+}
+
 
 //  changes the value of the question_result div
 //
@@ -153,4 +181,5 @@ var questionIndex = 0;
 // returns undefined (not intending this function to return anything useful)
 window.onload = function(){
   displayQuestion();
+  document.getElementById("submitter-new").addEventListener("click", process_answer_submission);
 };

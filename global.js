@@ -44,40 +44,6 @@ function given_answer(){
   return document.getElementById("answer").value
 };
 
-// gets the answer in the 'answer' ID html element
-//
-// returns a String of what the input field contains
-function given_answer_new(){
-  return document.getElementById("answer-new").value
-};
-
-
-
-
-
-
-/// Plan to do 
-// 1. Set global variable of question we are on
-// 2. Set global variable of array of all questions
-// 3. Use the global variable to find the answer class div of the current question
-// 4. Use that to check fi their answer is right
-
-
-
-
-
-
-
-// takes the answer_text as a string and returns its Index in the array
-//
-// answer_text - String that can be parsed into an Integer
-//
-// returns an Integer
-function choiceToIndex(answer_text){
-  answerIndex = parseInt(answer_text);
-  return (answerIndex - 1);
-}
-
 // returns Boolean indicating if the answer is correct
 //
 // answer_text - integer indicating the user's choice of answer
@@ -95,10 +61,13 @@ function is_correct_answer(answer_text){
   };    
 };
 
-function is_correct_answer_new(answer_text){
-  
-}
-
+// processes an answer from the input field and displays right or wrong in the div
+//
+// returns undefined
+function process_answer_submission(){
+  var user_answer = given_answer();
+  update_question_result(is_correct_answer(user_answer, questions[questionIndex]));
+};
 
 //  changes the value of the question_result div
 //
@@ -113,42 +82,6 @@ function update_question_result(correct){
   else{
     questionHTML.innerText = "Wrong! Which is harsh in my opinion."
   }
-}
-
-// processes an answer from the input field and displays right or wrong in the div
-//
-// returns undefined
-function process_answer_submission(){
-  var user_answer = given_answer();
-  update_question_result(is_correct_answer(user_answer, questions[questionIndex]));
-};
-
-// puts the first question and answer in the appropriate divs upon page load
-//
-// returns undefined (not intending this function to return anything useful)
-function displayQuestion() {
-  var questionHTML = document.getElementById("question");
-
-  questionHTML.innerHTML = questions[questionIndex].question;
-  
-  var possibleAnswersHTML = document.getElementById("choices");
-  
-  possibleAnswersHTML.innerHTML = getAllChoicesAsString(questions[questionIndex]);  
-  
-};
-
-
-// returns the final score as an Integer
-//
-// returns Integer
-function finalScore() {
-  return ((score/questions.length) * 100);
-}
-
-//
-function clearAnswer(){
-  document.getElementById("answer").value = "";
-  document.getElementById("question_result").innerText = "";
 }
 
 //
@@ -168,7 +101,158 @@ function nextQuestion(){
     document.getElementById("submitter").style.display = "none";
     document.getElementById("next").style.display = "none";
   }
+}
+
+// takes the answer_text as a string and returns its Index in the array
+//
+// answer_text - String that can be parsed into an Integer
+//
+// returns an Integer
+function choiceToIndex(answer_text){
+  answerIndex = parseInt(answer_text);
+  return (answerIndex - 1);
+}
+
+// puts the first question and answer in the appropriate divs upon page load
+//
+// returns undefined (not intending this function to return anything useful)
+function displayQuestion() {
+  var questionHTML = document.getElementById("question");
+
+  questionHTML.innerHTML = questions[questionIndex].question;
+  
+  var possibleAnswersHTML = document.getElementById("choices");
+  
+  possibleAnswersHTML.innerHTML = getAllChoicesAsString(questions[questionIndex]);  
+  
+}
+
+// returns the final score as an Integer
+//
+// returns Integer
+function finalScore() {
+  return ((score/questions.length) * 100);
+}
+
+//
+function clearAnswer(){
+  document.getElementById("answer").value = "";
+  document.getElementById("question_result").innerText = "";
+}
+
+/// Plan to do 
+// 1. Set global variable of question we are on
+// 2. Set global variable of array of all questions
+// 3. Use the global variable to find the answer class div of the current question
+// 4. Use that to check if their answer is right
+var current_question = 1;
+var number_of_questions = 4;
+
+// gets the answer in the 'answer' ID html element
+//
+// returns a String of what the input field contains
+function given_answer_new(){
+  return document.getElementById("answer-new").value
 };
+
+function get_current_question_new() {
+  return document.getElementById("question" + current_question);
+}
+
+function get_answer_new() {
+  var question = get_current_question_new();
+  var array = question.children;
+  var answer = find_element_from_array(array, "answer");
+  return answer.innerHTML;
+}
+
+// cycles through a class list array until it finds an element with the class_name_to_find
+//
+// array - array of Elements
+// class_name_to_find - String of the class we are trying to find among the array of Elements
+//
+// returns an Element matching the class_name
+function find_element_from_array(array, class_name_to_find) {
+  for (i=0; i < array.length; i++) {
+    if (array[i].className.indexOf(class_name_to_find) != -1) {
+      return array[i];
+    }
+  }
+}
+
+function is_correct_answer_new(answer_text) {
+  if (answer_text === get_answer_new()){
+    return true;
+  }
+  else {
+    return false;
+  }; 
+}
+
+//  changes the value of the question_result div
+//
+// correct - Boolean indicating whether the question is correct
+//
+// returns undefined (not intending this function to return anything useful)
+function update_question_result_new(correct){
+  var questionHTML = document.getElementById("question_result_new");
+  if (correct){
+    questionHTML.innerText = "Success!";
+  }
+  else{
+    questionHTML.innerText = "Wrong! Which is harsh in my opinion."
+  }
+}
+
+// processes an answer from the input field and displays right or wrong in the div
+//
+// returns undefined
+function process_answer_submission_new(){
+  var user_answer = given_answer_new();
+  update_question_result_new(is_correct_answer_new(user_answer));
+};
+
+// returns the final score as an Integer
+//
+// returns Integer
+function finalScore_new() {
+  return ((score/number_of_questions) * 100);
+}
+
+//
+function clearAnswer_new(){
+  document.getElementById("answer-new").value = "";
+  document.getElementById("question_result_new").innerText = "";
+}
+
+//
+function nextQuestion_new(){
+  if (is_correct_answer_new(given_answer_new())) {
+    score++;
+  }
+  if (current_question < number_of_questions){
+    toggle_visibility(get_current_question_new());
+    current_question++;
+    toggle_visibility(get_current_question_new());
+    clearAnswer_new();
+  }
+  else {
+    document.getElementById("total_result_new").innerText = "Your score is " + score + "/" + number_of_questions + "=" + finalScore_new() + "%.";
+    document.getElementById("answer-new").style.display = "none";
+    document.getElementById("submitter-new").style.display = "none";
+    document.getElementById("next_new").style.display = "none";
+  }
+};
+
+// this function will add a class if it isn't there and removes it if it is
+//
+// element is a DOM element
+//
+// returns nothing useful
+function toggle_visibility(element) {
+  element.classList.toggle("show");
+  element.classList.toggle("hide");
+}
 
 var score = 0;
 // Array of questions to be asked
@@ -181,5 +265,6 @@ var questionIndex = 0;
 // returns undefined (not intending this function to return anything useful)
 window.onload = function(){
   displayQuestion();
-  document.getElementById("submitter-new").addEventListener("click", process_answer_submission);
+  document.getElementById("submitter-new").addEventListener("click", process_answer_submission_new);
+  document.getElementById("next_new").addEventListener("click", nextQuestion_new);
 };

@@ -19,4 +19,8 @@ class Question
     @choices = CONNECTION.execute("SELECT * FROM choices WHERE question_id = #{@id};")
   end
   
+  def get_answer_index
+    (self.choices.index{|choice| choice["id"] == self.answer.to_i}) + 1 
+  end
+  
 end

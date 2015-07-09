@@ -1,16 +1,28 @@
 
-    <% @questions.each do |question| %>
-      <div id="question<%= question.id %>" class="questions show">
-        <div class="display-question">
-          <p><%= question.question %></p>
-        </div>
-        <div class="choices">  
-          <ol>
-            <% question.choices.each do |choice| %>
-              <li><%= choice["choice"] %></li>
-            <% end %>
-          </ol>
-        </div>
-        <div class="answer"><%= question.answer %></div>
-      </div>
-    <% end %>
+<% @questions.each_with_index do |question, x| %>
+  <% if x == 0 %>
+  <%  @class = "show" %>
+  <% else %>
+  <%  @class = "hide"%>
+  <% end %>
+  <div id="question<%= question.id %>" class="questions <%= @class %>">
+    <div class="display-question">
+      <p><%= question.question %></p>
+    </div>
+    <div class="choices">  
+      <ol>
+        <% question.choices.each do |choice| %>
+          <li><%= choice["choice"] %></li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="answer"><%= question.get_answer_index %></div>
+  </div>
+<% end %>
+
+<input type="text" id="answer"></input>
+<button id="submitter" type="button">That's my guess!</button>
+</div>
+<div id="question_result"></div>
+<button id="next" type="button">Next question</button>
+<div id="total_result"></div>

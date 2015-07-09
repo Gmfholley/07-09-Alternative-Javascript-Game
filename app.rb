@@ -11,3 +11,11 @@ CONNECTION.execute("CREATE TABLE IF NOT EXISTS choices (id INTEGER PRIMARY KEY, 
 CONNECTION.results_as_hash = true
 
 require_relative 'models/question.rb'
+
+
+get "/home" do
+  @questions = Question.all
+  
+  erb :home
+  
+end

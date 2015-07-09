@@ -1,0 +1,16 @@
+
+    <% @questions.each do |question| %>
+      <div id="question<%= question.id %>" class="questions show">
+        <div class="display-question">
+          <p><%= question.question %></p>
+        </div>
+        <div class="choices">  
+          <ol>
+            <% question.choices.each do |choice| %>
+              <li><%= choice["choice"] %></li>
+            <% end %>
+          </ol>
+        </div>
+        <div class="answer"><%= question.answer %></div>
+      </div>
+    <% end %>
